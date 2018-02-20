@@ -216,7 +216,7 @@ class Game:public Window {
 			characters[i]->render();
 		}
 	}
-	void eventHandler(SDL_Event e) {
+	/*void eventHandler(SDL_Event e) {
 		if( e.type == SDL_KEYDOWN ) {
 			switch( e.key.keysym.sym ) {
 				case SDLK_a: vX = -5; break;
@@ -229,7 +229,7 @@ class Game:public Window {
 				case SDLK_d: vX = -5; break;
 			}        
 		}
-	}
+	}*/
 };
 
 class TheGame: public Game {
