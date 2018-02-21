@@ -1,12 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <ctime>
-#include <string>
 #include <sstream>
 
 #include "SDL2\SDL.h"
-
-#define DEBUG(s)
 
 using namespace std;
 
@@ -21,9 +17,9 @@ class Window {
 	int getX() {return X;}
 	int getY() {return Y;}
 	SDL_Renderer* getRenderer() { return renderer; }
-	void init(int newX=640, int newY=480) {
-		X=newX;
-		Y=newY;
+	void init(int nX=640, int nY=480) {
+		X=nX;
+		Y=nY;
 		done=false;
 		dead=false;
 		SDL_Init(SDL_INIT_VIDEO);
@@ -59,7 +55,6 @@ class Window {
 			if (SDL_PollEvent(&event)) {
 				eventHandler(event);
 			}
-			//SDL_Delay(1000/60);
 		}
 		if (!done) cleanup();
 	}
@@ -71,7 +66,7 @@ class Window {
 	}
 };
 
-class AnimationFrame {
+class Animation {
 	SDL_Texture *texture;
 	Window *win;
 	int w, h, time;
@@ -104,9 +99,7 @@ class AnimationFrame {
 		SDL_FreeSurface(image);
 		SDL_QueryTexture(texture, NULL, NULL, &w, &h);
 	}
-	void cleanup() {
-		SDL_DestroyTexture(texture);
-	}
+	void cleanup(){ SDL_DestroyTexture(texture); }
 };
 
 class Sprite {
@@ -116,16 +109,16 @@ class Sprite {
 	int w, h, count;
 	bool done;
 	float vX, vY, pX, pY, T0;
-	vector <AnimationFrame> frames;
+	vector <Animation> frames;
 	int totalAnimationTime, totalGameTime;
   public:
 	float getVX() { return vX; }
 	float getVY() { return vY; }
 	float getPX() { return pX; }
 	float getPY() { return pY; }
-	void add(AnimationFrame af) {
-		frames.push_back(af);
-		totalAnimationTime+=af.getTime();
+	void add(Animation anim) {
+		frames.push_back(anim);
+		totalAnimationTime+=anim.getTime();
 	}
 	void loop(float dt) {
 		pX=pX+vX*dt;
@@ -152,11 +145,11 @@ class Sprite {
 	}
 	void setup(){
 		for (int i = 0; i<count; i++) {
-			AnimationFrame af;
+			Animation anim;
 			stringstream sstring;
 			sstring << file << i << ".bmp";
-			af.setup(win, sstring.str().c_str(), 333);
-			add(af);
+			anim.setup(win, sstring.str().c_str(), 333);
+			add(anim);
 		}
 	}
 	void render() {
@@ -176,9 +169,7 @@ class Sprite {
 			}
 		}
 	}
-	void exit() {
-		
-	}
+	void exit() {}
 };
 
 class Player:public Sprite {
@@ -188,8 +179,8 @@ class Player:public Sprite {
 	int newCount,
 	float newVX=0.0,
 	float newVY=0.0,
-	float newPX=128.0,
-	float newPY=512.0,
+	float newPX=64.0,
+	float newPY=256.0,
 	int newT0=0) {
 		win=newWin;
 		file=newFile;
@@ -204,37 +195,18 @@ class Player:public Sprite {
 
 class Game:public Window {
   protected:
-	vector <Sprite *> characters;
+	vector <Sprite *> chars;
 	vector <Player *> player;
 	public:
-	void add(Sprite *c) { characters.push_back(c); }
+	void add(Sprite *c) { chars.push_back(c); }
 	void loop(float dt) {
-		for (unsigned int i=0; i<characters.size(); i++) {
-			characters[i]->loop(dt);
-		}
-		for (unsigned int i=0; i<characters.size(); i++) {
-			characters[i]->render();
-		}
+		for (unsigned int i=0;i<chars.size();i++){chars[i]->loop(dt);}
+		for (unsigned int i=0;i<chars.size();i++){chars[i]->render();}
 	}
-	/*void eventHandler(SDL_Event e) {
-		if( e.type == SDL_KEYDOWN ) {
-			switch( e.key.keysym.sym ) {
-				case SDLK_a: vX = -5; break;
-				case SDLK_d: vX = 5; break;
-			}    
-		}
-		else if( e.type == SDL_KEYUP ) {
-			switch( e.key.keysym.sym ) {
-				case SDLK_a: vX = 5; break;
-				case SDLK_d: vX = -5; break;
-			}        
-		}
-	}*/
 };
 
-class TheGame: public Game {
+class NewGame: public Game {
 	void setup() {
-		DEBUG("In Setup");
 		Sprite *back = new Sprite();
 		back->init(this, "Back", 1);
 		back->setup();
@@ -244,22 +216,28 @@ class TheGame: public Game {
 		player->setup();
 		add(player);
 	}
-	void eventHandler(SDL_Event e) {
-		if (e.type == SDL_KEYDOWN) {
-			if (e.key.keysym.sym==SDLK_ESCAPE) {
-				done=true;
+	void eventHandler(SDL_Event event) {
+		if (event.type == SDL_KEYDOWN) {
+			switch( event.key.keysym.sym ) {
+				case SDLK_ESCAPE: done=true;
+				case SDLK_a: /*player vX = <0;*/ break;
+				case SDLK_d: /*player vX = >0;*/ break;
 			}
 		}
+		else if( event.type == SDL_KEYUP ) {
+			switch( event.key.keysym.sym ) {
+				case SDLK_a: /*player vX = 0;*/ break;
+				case SDLK_d: /*player vX = 0;*/ break;
+			}        
+		}
 	}
-	void cleanup() {
-	}
+	void cleanup() {}
 };
 
-TheGame Remembered;
+NewGame Remembered;
 
 int main(int argc, char* argv[]) {
-	Remembered.init(1920, 1080);
-	DEBUG("After init ");
+	Remembered.init(1280, 720);
 	Remembered.run();
 	Remembered.exit();
 	return 0;
