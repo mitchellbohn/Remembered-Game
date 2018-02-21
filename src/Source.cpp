@@ -1,12 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <ctime>
-#include <string>
 #include <sstream>
 
 #include "SDL2\SDL.h"
-
-#define DEBUG(s)
 
 using namespace std;
 
@@ -59,7 +55,6 @@ class Window {
 			if (SDL_PollEvent(&event)) {
 				eventHandler(event);
 			}
-			//SDL_Delay(1000/60);
 		}
 		if (!done) cleanup();
 	}
@@ -212,7 +207,6 @@ class Game:public Window {
 
 class NewGame: public Game {
 	void setup() {
-		DEBUG("In Setup");
 		Sprite *back = new Sprite();
 		back->init(this, "Back", 1);
 		back->setup();
@@ -224,22 +218,18 @@ class NewGame: public Game {
 	}
 	void eventHandler(SDL_Event event) {
 		if (event.type == SDL_KEYDOWN) {
-			if (event.key.keysym.sym==SDLK_ESCAPE) {
-				done=true;
-			}
-		}
-		/*if( event.type == SDL_KEYDOWN ) {
 			switch( event.key.keysym.sym ) {
-				case SDLK_a: vX = -5; break;
-				case SDLK_d: vX = 5; break;
-			}    
+				case SDLK_ESCAPE: done=true;
+				case SDLK_a: /*player vX = <0;*/ break;
+				case SDLK_d: /*player vX = >0;*/ break;
+			}
 		}
 		else if( event.type == SDL_KEYUP ) {
 			switch( event.key.keysym.sym ) {
-				case SDLK_a: vX = 5; break;
-				case SDLK_d: vX = -5; break;
+				case SDLK_a: /*player vX = 0;*/ break;
+				case SDLK_d: /*player vX = 0;*/ break;
 			}        
-		}*/
+		}
 	}
 	void cleanup() {}
 };
@@ -248,7 +238,6 @@ NewGame Remembered;
 
 int main(int argc, char* argv[]) {
 	Remembered.init(1280, 720);
-	DEBUG("After init ");
 	Remembered.run();
 	Remembered.exit();
 	return 0;
