@@ -6,8 +6,6 @@
 
 #include "SDL2\SDL.h"
 
-#define DEBUG(s)
-
 using namespace std;
 
 class Window {
@@ -16,7 +14,7 @@ class Window {
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	bool done;
-	bool dead;
+	//bool dead;
   public:
 	int getX() {return X;}
 	int getY() {return Y;}
@@ -25,7 +23,7 @@ class Window {
 		X=newX;
 		Y=newY;
 		done=false;
-		dead=false;
+		//dead=false;
 		SDL_Init(SDL_INIT_VIDEO);
 		window = SDL_CreateWindow("Remembered", SDL_WINDOWPOS_UNDEFINED, 
 			SDL_WINDOWPOS_UNDEFINED, X, Y, SDL_WINDOW_OPENGL
@@ -49,8 +47,8 @@ class Window {
 	void run() {
 		setup();
 		float last = SDL_GetTicks();
-		bool dead = false;
-		while (!dead && !done) {
+		//bool dead = false;
+		while (/*!dead && */!done) {
 			SDL_Event event;
 			float dt=((float)SDL_GetTicks()-last)/1000.0;
 			last = SDL_GetTicks();
@@ -59,7 +57,7 @@ class Window {
 			if (SDL_PollEvent(&event)) {
 				eventHandler(event);
 			}
-			//SDL_Delay(1000/60);
+			SDL_Delay(1000/60);
 		}
 		if (!done) cleanup();
 	}
@@ -176,9 +174,7 @@ class Sprite {
 			}
 		}
 	}
-	void exit() {
-		
-	}
+	void exit() {}
 };
 
 class Player:public Sprite {
@@ -234,7 +230,6 @@ class Game:public Window {
 
 class TheGame: public Game {
 	void setup() {
-		DEBUG("In Setup");
 		Sprite *back = new Sprite();
 		back->init(this, "Back", 1);
 		back->setup();
@@ -251,15 +246,13 @@ class TheGame: public Game {
 			}
 		}
 	}
-	void cleanup() {
-	}
+	void cleanup() {}
 };
 
 TheGame Remembered;
 
 int main(int argc, char* argv[]) {
 	Remembered.init(1920, 1080);
-	DEBUG("After init ");
 	Remembered.run();
 	Remembered.exit();
 	return 0;
