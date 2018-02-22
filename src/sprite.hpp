@@ -1,6 +1,7 @@
 #ifndef SPRITE_HPP
 #define SPRITE_HPP
 
+
 class Sprite {
 protected:
 	Window *win;
