@@ -17,19 +17,34 @@
 #include "player.hpp"
 #include "game.hpp"
 
+using namespace std;
+
 class NewGame : public Game {
 	void setup() {
 		Sprite *back = new Sprite();
 		back->init(this, "Back", 1);
 		back->setup();
 		add(back);
-		//Sprite *floor = new Sprite();
-		//floor->init(this, "Plat", 1);
 		Player *player = new Player();
 		player->init(this, "Player", 4);
 		player->setup();
 		//player->setVX(20.0); 
 		add(player);
+	}
+	void eventHandler(SDL_Event event) {
+		if (event.type == SDL_KEYDOWN) {
+			switch( event.key.keysym.sym ) {
+				case SDLK_ESCAPE: done=true;
+				case SDLK_a: /*player vX = <0;*/ break;
+				case SDLK_d: /*player vX = >0;*/ break;
+			}
+		}
+		else if( event.type == SDL_KEYUP ) {
+			switch( event.key.keysym.sym ) {
+				case SDLK_a: /*player vX = 0;*/ break;
+				case SDLK_d: /*player vX = 0;*/ break;
+			}        
+		}
 	}
 	void cleanup() {}
 };

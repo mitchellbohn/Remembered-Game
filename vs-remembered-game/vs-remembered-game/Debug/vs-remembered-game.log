@@ -5,7 +5,7 @@ c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembe
 c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\sprite.hpp(58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\sprite.hpp(64): warning C4018: '<': signed/unsigned mismatch
 c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\sprite.hpp(67): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\source.cpp(37): error C2259: 'NewGame': cannot instantiate abstract class
-  c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\source.cpp(37): note: due to following members:
-  c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\source.cpp(37): note: 'void Window::eventHandler(SDL_Event)': is abstract
+c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\source.cpp(38): error C2259: 'NewGame': cannot instantiate abstract class
+  c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\source.cpp(38): note: due to following members:
+  c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\source.cpp(38): note: 'void Window::eventHandler(SDL_Event)': is abstract
   c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\window.hpp(39): note: see declaration of 'Window::eventHandler'

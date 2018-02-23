@@ -1,10 +1,9 @@
 #ifndef SPRITE_HPP
 #define SPRITE_HPP
 
-
 class Sprite {
 protected:
-	Window * win;
+	Window *win;
 	string file;
 	int w, h, count;
 	bool done;

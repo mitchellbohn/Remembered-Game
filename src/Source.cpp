@@ -55,21 +55,6 @@ public:
 				}        
 			}
 	}
-	void run() {
-		float last = SDL_GetTicks();
-		while (!done) {
-			SDL_Event event;
-			float dt=((float)SDL_GetTicks()-last)/1000.0;
-			last = SDL_GetTicks();
-			loop(dt);
-			//SDL_RenderPresent(renderer);
-			if (SDL_PollEvent(&event)) {
-				eventHandler(event);
-			}
-			SDL_Delay(1000/60);
-		}
-		//if (!done) cleanup();
-	}
 };
 
 class Game:public Window {
@@ -85,29 +70,17 @@ public:
 };
 
 class NewGame: public Game {
-public:
 	void setup() {
 		Sprite *back = new Sprite();
 		back->init(this, "Back", 1);
 		back->setup();
 		add(back);
-		//Sprite *floor = new Sprite();
-		//floor->init(this, "Plat", 1);
 		Player *player = new Player();
 		player->init(this, "Player", 4);
 		player->setup();
-		player->run();
 		//player->setVX(20.0); 
 		add(player);
 	}
-	void eventHandler(SDL_Event event) {
-		if (event.type == SDL_KEYDOWN) {
-			switch( event.key.keysym.sym ) {
-				case SDLK_ESCAPE: done=true;
-			}
-		}
-	}
-	void cleanup() {}
 };
 
 NewGame Remembered;
