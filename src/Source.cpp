@@ -9,7 +9,7 @@
 #include <vector>
 #include <sstream>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "window.hpp"
 #include "animation.hpp"
