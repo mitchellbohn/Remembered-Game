@@ -31,6 +31,7 @@
   <ItemGroup>
     <ClInclude Include="animation.hpp" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="newGame.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="sprite.hpp" />
     <ClInclude Include="window.hpp" />

@@ -1,10 +1,14 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include "sprite.hpp"
 
 class Player :public Sprite {
 public:
-
+	void setVX(float newVX) { vX = newVX; }
+	void setVY(float newVY) { vY = newVY; }
+	void setPX(float newPX) { pX = newPX; }
+	void setPY(float newPY) { pY = newPY; }
 	void init(Window *newWin,
 		string newFile,
 		int newCount,

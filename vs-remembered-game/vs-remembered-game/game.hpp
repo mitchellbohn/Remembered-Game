@@ -1,6 +1,8 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "player.hpp"
+
 class Game :public Window {
 protected:
 	vector <Sprite *> chars;

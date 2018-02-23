@@ -1,6 +1,8 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
+#include "window.hpp"
+
 class Animation {
 	SDL_Texture *texture;
 	Window *win;

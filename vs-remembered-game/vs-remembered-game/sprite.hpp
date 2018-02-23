@@ -1,6 +1,11 @@
 #ifndef SPRITE_HPP
 #define SPRITE_HPP
 
+#include <vector>
+#include <sstream>
+
+#include "animation.hpp"
+
 class Sprite {
 protected:
 	Window *win;
