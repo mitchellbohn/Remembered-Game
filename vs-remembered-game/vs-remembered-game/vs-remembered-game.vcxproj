@@ -19,9 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Back0.bmp" />
     <Image Include="Player0.bmp" />
     <Image Include="Player1.bmp" />
@@ -29,12 +26,15 @@
     <Image Include="Player3.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="animation.hpp" />
-    <ClInclude Include="game.hpp" />
-    <ClInclude Include="newGame.hpp" />
-    <ClInclude Include="player.hpp" />
-    <ClInclude Include="sprite.hpp" />
-    <ClInclude Include="window.hpp" />
+    <ClInclude Include="..\..\src\animation.hpp" />
+    <ClInclude Include="..\..\src\game.hpp" />
+    <ClInclude Include="..\..\src\newGame.hpp" />
+    <ClInclude Include="..\..\src\player.hpp" />
+    <ClInclude Include="..\..\src\sprite.hpp" />
+    <ClInclude Include="..\..\src\window.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Source.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

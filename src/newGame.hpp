@@ -19,14 +19,14 @@ class NewGame : public Game {
 		if (event.type == SDL_KEYDOWN) {
 			switch (event.key.keysym.sym) {
 			case SDLK_ESCAPE: done = true;
-			case SDLK_a: /*player vX = <0;*/ break;
-			case SDLK_d: /*player vX = >0;*/ break;
+			case SDLK_a: /*player->setVX(-250.0);*/ break;
+			case SDLK_d: /*player->setVX(250.0);*/ break;
 			}
 		}
 		else if (event.type == SDL_KEYUP) {
 			switch (event.key.keysym.sym) {
-			case SDLK_a: /*player vX = 0;*/ break;
-			case SDLK_d: /*player vX = 0;*/ break;
+			case SDLK_a: /*player->setVX(0.0);*/ break;
+			case SDLK_d: /*player->setVX(0.0);*/ break;
 			}
 		}
 	}
