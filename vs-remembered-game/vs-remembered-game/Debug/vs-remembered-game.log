@@ -1,8 +1,3 @@
-﻿  Source.cpp
-c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\window.hpp(45): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\window.hpp(48): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\window.hpp(49): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\sprite.hpp(62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\sprite.hpp(68): warning C4018: '<': signed/unsigned mismatch
-c:\users\mitchell\documents\github\remembered-game\vs-remembered-game\vs-remembered-game\sprite.hpp(71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  LINK : C:\Users\Mitchell\Documents\GitHub\Remembered-Game\vs-remembered-game\Debug\vs-remembered-game.exe not found or not built by the last incremental link; performing full link
+     Creating library C:\Users\Mitchell\Documents\GitHub\Remembered-Game\vs-remembered-game\Debug\vs-remembered-game.lib and object C:\Users\Mitchell\Documents\GitHub\Remembered-Game\vs-remembered-game\Debug\vs-remembered-game.exp
   vs-remembered-game.vcxproj -> C:\Users\Mitchell\Documents\GitHub\Remembered-Game\vs-remembered-game\Debug\vs-remembered-game.exe
