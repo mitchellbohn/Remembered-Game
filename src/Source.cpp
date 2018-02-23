@@ -1,3 +1,10 @@
+/* 'a' & 'd' movements
+ * 'w' & 's' movements
+ * floor
+ * side-scrolling
+ */
+
+
 #include <iostream>
 #include <vector>
 #include <sstream>
@@ -21,8 +28,8 @@ public:
 	int newCount,
 	float newVX=0.0,
 	float newVY=0.0,
-	float newPX=64.0,
-	float newPY=256.0,
+	float newPX=32.0,
+	float newPY=128.0,
 	int newT0=0) {
 		win=newWin;
 		file=newFile;
@@ -32,6 +39,36 @@ public:
 		pY=newPY;
 		count=newCount;
 		gameTime=newT0;
+		
+	}
+	void eventHandler(SDL_Event event) {
+			if (event.type == SDL_KEYDOWN) {
+				switch( event.key.keysym.sym ) {
+					case SDLK_a: vX = 30.0; break;
+					//case SDLK_d: player->setVX(speed); break;
+				}
+			}
+			else if( event.type == SDL_KEYUP ) {
+				switch( event.key.keysym.sym ) {
+					//case SDLK_a: Player->setVX(speed); break;
+					//case SDLK_d: Player->setVX(speed); break;
+				}        
+			}
+	}
+	void run() {
+		float last = SDL_GetTicks();
+		while (!done) {
+			SDL_Event event;
+			float dt=((float)SDL_GetTicks()-last)/1000.0;
+			last = SDL_GetTicks();
+			loop(dt);
+			//SDL_RenderPresent(renderer);
+			if (SDL_PollEvent(&event)) {
+				eventHandler(event);
+			}
+			SDL_Delay(1000/60);
+		}
+		//if (!done) cleanup();
 	}
 };
 
@@ -39,7 +76,6 @@ class Game:public Window {
 protected:
 	vector <Sprite *> chars;
 	vector <Player *> player;
-	float speed = 10.0;
 public:
 	void add(Sprite *c) { chars.push_back(c); }
 	void loop(float dt) {
@@ -55,25 +91,20 @@ public:
 		back->init(this, "Back", 1);
 		back->setup();
 		add(back);
+		//Sprite *floor = new Sprite();
+		//floor->init(this, "Plat", 1);
 		Player *player = new Player();
 		player->init(this, "Player", 4);
 		player->setup();
-		//player->setVX(10); 
+		player->run();
+		//player->setVX(20.0); 
 		add(player);
 	}
 	void eventHandler(SDL_Event event) {
 		if (event.type == SDL_KEYDOWN) {
 			switch( event.key.keysym.sym ) {
 				case SDLK_ESCAPE: done=true;
-				//case SDLK_a: player.setVX(speed); break;
-				//case SDLK_d: player->setVX(10); break;
 			}
-		}
-		else if( event.type == SDL_KEYUP ) {
-			switch( event.key.keysym.sym ) {
-				//case SDLK_a: Player->setVX(0); break;
-				//case SDLK_d: Player->setVX(0); break;
-			}        
 		}
 	}
 	void cleanup() {}
@@ -82,7 +113,7 @@ public:
 NewGame Remembered;
 
 int main(int argc, char* argv[]) {
-	Remembered.init(1920, 1080);
+	Remembered.init(1280, 720);
 	Remembered.run();
 	Remembered.exit();
 	return 0;
