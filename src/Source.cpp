@@ -1,8 +1,10 @@
-/* 'a' & 'd' movements
-* 'w' & 's' movements
-* floor
-* side-scrolling
-*/
+/* TO-DO:
+ * 'a' & 'd' movements
+ * platform 'collision'
+ * 'w' & 's' movements
+ * side-scrolling
+ * second map-state 'e'
+ */
 
 #include "newGame.hpp"
 

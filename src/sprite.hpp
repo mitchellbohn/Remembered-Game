@@ -12,7 +12,7 @@ protected:
 	string file;
 	int w, h, count;
 	bool done;
-	float vX, vY, pX, pY, T0;
+	float aX, aY, vX, vY, pX, pY, T0;
 	vector <Animation> frames;
 	int animationTime, gameTime;
 public:
@@ -24,12 +24,22 @@ public:
 		frames.push_back(anim);
 		animationTime += anim.getTime();
 	}
-	void loop(float dt) {
+	virtual void loop(float dt) {
+		vX = vX + aX * dt;
+		vY = vY + aY * dt;
 		pX = pX + vX * dt;
 		pY = pY + vY * dt;
 		gameTime += (int)(dt*1000.0);
 	};
+	virtual void cleanup() {
+		for (unsigned i=0;i<frames.size();i++) {
+			frames[i].cleanup();
+		}
+	}
+	bool isDone(){ return done; }
 	void init(Window *newWin, string newFile, int newCount = 1,
+		float newAX = 0.0, 
+		float newAY = 0.0,
 		float newVX = 0.0,
 		float newVY = 0.0,
 		float newPX = 0.0,
@@ -42,12 +52,14 @@ public:
 		count = newCount;
 		gameTime = newT0;
 		animationTime = 0;
+		aX = newAX;
+		aY = newAY;
 		vX = newVX;
 		vY = newVY;
 		pX = newPX;
 		pY = newPY;
 	}
-	void setup() {
+	virtual void setup() {
 		for (int i = 0; i<count; i++) {
 			Animation anim;
 			stringstream sstring;

@@ -6,7 +6,6 @@
 class Game :public Window {
 protected:
 	vector <Sprite *> chars;
-	vector <Player *> player;
 public:
 	void add(Sprite *c) { chars.push_back(c); }
 	void loop(float dt) {
