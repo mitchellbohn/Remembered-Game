@@ -16,6 +16,12 @@ protected:
 	vector <Animation> frames;
 	int animationTime, gameTime;
 public:
+	void setAX(float newAX) { aX = newAX; }
+	void setAY(float newAY) { aY = newAY; }
+	void setVX(float newVX) { vX = newVX; }
+	void setVY(float newVY) { vY = newVY; }
+	void setPX(float newPX) { pX = newPX; }
+	void setPY(float newPY) { pY = newPY; }
 	float getVX() { return vX; }
 	float getVY() { return vY; }
 	float getPX() { return pX; }
