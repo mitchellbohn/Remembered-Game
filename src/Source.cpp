@@ -1,8 +1,7 @@
 /* TO-DO:
  * platform 'collision'
- * 'w' & 's' movements
  * side-scrolling
- * second map-state 'e'
+ * switch to second map-state with 'e'
  */
 
 #include "newGame.hpp"

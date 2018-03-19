@@ -34,5 +34,33 @@ class NewGame : public Game {
 		}
 	}
 	void cleanup() {}
+	
+	static int startPhysicsLoop(void *NewGamePtr) {
+		NewGame *n=(NewGame *)NewGamePtr;
+		float last=SDL_GetTicks();
+		while (!n->done) {
+			float dt = ((float)SDL_GetTicks() - last) / 1000.0;
+			last=SDL_GetTicks();
+			n->physicsLoop(dt);
+			int ms=1000/60-dt*1000;
+			if (ms<0) ms=0;
+			SDL_Delay(ms);
+		}
+		return 0;
+	}
+	
+	static int startRenderLoop(void *NewGamePtr) {
+		NewGame *n=(NewGame *)NewGamePtr;
+		float last=SDL_GetTicks();
+		while (!n->done) {
+			float dt = ((float)SDL_GetTicks() - last) / 1000.0;
+			last=SDL_GetTicks();
+			n->renderLoop(dt);
+			int ms=1000/60-dt*1000;
+			if (ms<0) ms=0;
+			SDL_Delay(ms);
+		}
+		return 0;
+	}
 };
 #endif
